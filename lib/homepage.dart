@@ -167,7 +167,83 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-            )
+            ),
+            //const Gap(10),
+            // ignore: sized_box_for_whitespace
+            Container(
+              height: 180,
+              width: MediaQuery.of(context).size.width,
+              //color: Colors.blue,
+              child: Stack(
+                children: [
+                  Container(
+                    height: 110,
+                    width: MediaQuery.of(context).size.width,
+                    margin: const EdgeInsets.only(top: 40),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      image: const DecorationImage(
+                          image: AssetImage("assets/card.jpg"),
+                          fit: BoxFit.fill),
+                      boxShadow: [
+                        BoxShadow(
+                          offset: const Offset(8, 10),
+                          blurRadius: 40,
+                          color:
+                              colors.AppColor.gradientSecond.withOpacity(0.3),
+                        ),
+                        BoxShadow(
+                          offset: const Offset(-1, -5),
+                          blurRadius: 40,
+                          color:
+                              colors.AppColor.gradientSecond.withOpacity(0.3),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: 200,
+                    width: MediaQuery.of(context).size.width,
+                    margin: const EdgeInsets.only(right: 200, bottom: 30),
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/figure.png'),
+                      ),
+                      //color: colors.AppColor.circuitsColor.withOpacity(0.3),
+                    ),
+                  ),
+                  Container(
+                    width: double.maxFinite,
+                    height: 150,
+                    margin: const EdgeInsets.only(top: 50, left: 160),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'You are doing great',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: colors.AppColor.homePageDetail,
+                          ),
+                        ),
+                        const Gap(15),
+                        RichText(
+                          text: TextSpan(
+                              text: "Keep it up\n",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: colors.AppColor.homePagePlanColor),
+                              children: const [
+                                TextSpan(text: "stick to your plan")
+                              ]),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
           ],
         ),
       ),
