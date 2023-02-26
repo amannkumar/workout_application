@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/route_manager.dart';
+import 'package:workout_app/video_info.dart';
 import 'colors.dart' as colors;
 
 class HomePage extends StatefulWidget {
@@ -23,7 +25,6 @@ class _HomePageState extends State<HomePage> {
   _initData() {
     DefaultAssetBundle.of(context).loadString("json/info.json").then((value) {
       info = json.decode(value);
-      print(info.length);
     });
   }
 
@@ -74,11 +75,16 @@ class _HomePageState extends State<HomePage> {
                       fontWeight: FontWeight.w700),
                 ),
                 Expanded(child: Container()),
-                Text(
-                  'Details',
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: colors.AppColor.homePageDetail,
+                InkWell(
+                  onTap: () {
+                    Get.to(() => const VideoInfo());
+                  },
+                  child: Text(
+                    'Details',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: colors.AppColor.homePageDetail,
+                    ),
                   ),
                 ),
                 const Gap(5),
