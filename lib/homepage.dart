@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'colors.dart' as colors;
@@ -10,6 +12,21 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List info = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _initData();
+  }
+
+  _initData() {
+    DefaultAssetBundle.of(context).loadString("json/info.json").then((value) {
+      info = json.decode(value);
+      print(info.length);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -168,7 +185,6 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            //const Gap(10),
             // ignore: sized_box_for_whitespace
             Container(
               height: 180,
@@ -242,6 +258,108 @@ class _HomePageState extends State<HomePage> {
                     ),
                   )
                 ],
+              ),
+            ),
+            const Gap(10),
+            Container(
+              alignment: Alignment.topLeft,
+              child: Text(
+                'Area of focus',
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.w500,
+                  color: colors.AppColor.homePageTitle,
+                ),
+              ),
+            ),
+            Expanded(
+              child: OverflowBox(
+                maxWidth: MediaQuery.of(context).size.width,
+                child: MediaQuery.removePadding(
+                  context: context,
+                  removeTop: true,
+                  child: ListView.builder(
+                      itemCount: info.length.toDouble() ~/ 2,
+                      itemBuilder: (_, i) {
+                        int a = 2 * i;
+                        int b = 2 * i + 1;
+                        return Row(
+                          children: [
+                            Container(
+                              height: 170,
+                              width:
+                                  (MediaQuery.of(context).size.width - 90) / 2,
+                              margin: const EdgeInsets.only(
+                                  left: 30, bottom: 15, top: 15),
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15),
+                                  image: DecorationImage(
+                                    image: AssetImage(info[a]["img"]),
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 3,
+                                      offset: const Offset(5, 5),
+                                      color: colors.AppColor.gradientSecond
+                                          .withOpacity(0.1),
+                                    ),
+                                    BoxShadow(
+                                      blurRadius: 3,
+                                      offset: const Offset(-5, -5),
+                                      color: colors.AppColor.gradientSecond
+                                          .withOpacity(0.1),
+                                    ),
+                                  ]),
+                              alignment: Alignment.bottomCenter,
+                              padding: const EdgeInsets.only(bottom: 5),
+                              child: Text(
+                                info[a]["title"],
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: colors.AppColor.homePageDetail),
+                              ),
+                            ),
+                            Container(
+                              height: 170,
+                              width:
+                                  (MediaQuery.of(context).size.width - 90) / 2,
+                              margin: const EdgeInsets.only(
+                                  left: 30, bottom: 15, top: 15),
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15),
+                                  image: DecorationImage(
+                                    image: AssetImage(info[b]["img"]),
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 3,
+                                      offset: const Offset(5, 5),
+                                      color: colors.AppColor.gradientSecond
+                                          .withOpacity(0.1),
+                                    ),
+                                    BoxShadow(
+                                      blurRadius: 3,
+                                      offset: const Offset(-5, -5),
+                                      color: colors.AppColor.gradientSecond
+                                          .withOpacity(0.1),
+                                    ),
+                                  ]),
+                              alignment: Alignment.bottomCenter,
+                              padding: const EdgeInsets.only(bottom: 5),
+                              child: Text(
+                                info[b]["title"],
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: colors.AppColor.homePageDetail),
+                              ),
+                            ),
+                          ],
+                        );
+                      }),
+                ),
               ),
             ),
           ],
